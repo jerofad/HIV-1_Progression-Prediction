@@ -11,10 +11,9 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score, KFold
 from sklearn.metrics import classification_report, accuracy_score
 #classifiers
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegressionCV
 from sklearn.neural_network import MLPClassifier
-from sklearn.svm import SVC
-from sklearn.ensemble import  AdaBoostClassifier
+from sklearn.ensemble import  AdaBoostClassifier, RandomForestClassifier
 from xgboost import XGBClassifier
 # class balancing
 from imblearn.over_sampling import SMOTE
@@ -35,14 +34,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 scoring = 'accuracy'
 
 # Define models 
-names = ["Neural Net","SVM ", "AdaBoost","XGBoost", "Logistic Regression"]
-# Add more classisifer: Ensemble modelling and Boosting.
+names = [" Random Forest","Neural Net", "AdaBoost","XGBoost", "Logistic Regression "]
 classifiers = [
-     MLPClassifier(alpha=1,batch_size=30),
-     SVC(kernel = 'rbf',), 
+     RandomForestClassifier(bootstrap=True, max_depth=10, n_estimators=550, criterion="entropy",
+                                          max_features='auto', class_weight="balanced", n_jobs=5),
+     MLPClassifier(alpha=1,batch_size=30), 
      AdaBoostClassifier(),
      XGBClassifier(base_score=1, booster='gbtree',learning_rate=0.1,n_estimators=100),
-     LogisticRegression(C=8.0, verbose=5, solver='lbfgs')
+     LogisticRegressionCV(C=8.0, verbose=5, solver='lbfgs')
 ]
 seed = 1
 models = zip(names, classifiers)
@@ -60,9 +59,10 @@ for name, model in models:
     predictions = model.predict(X_test)
     predictions = [round(value) for value in predictions]
     msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
-    # TODO: Write this to a file.
-    print(msg)
-    print('--------------------------------------------------')
-    print(accuracy_score(y_test, predictions))
-    print(classification_report(y_test, predictions))
-    print('--------------------------------------------------')
+    # Write the report to a file.
+    with open('models_report.txt', 'a') as f:
+      print(msg, file=f)
+      print('--------------------------------------------------', file=f)
+      print(accuracy_score(y_test, predictions), file=f)
+      print(classification_report(y_test, predictions), file=f)
+      print('--------------------------------------------------', file=f)
