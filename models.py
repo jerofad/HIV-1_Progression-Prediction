@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-This file lists all models used on the dataset
+This file lists all the 10 models used on the dataset
+Outputs the result and report into all_models_report.txt file
 """
 import pandas as pd
 import numpy as np
@@ -68,7 +69,7 @@ for name, model in models:
     predictions = [round(value) for value in predictions]
     msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
     # Write the report to a file.
-    with open('models_report.txt', 'a') as f:
+    with open('all_models_report.txt', 'a') as f:
         print(msg, file=f)
         print('--------------------------------------------------', file=f)
         print(accuracy_score(y_test, predictions), file=f)
