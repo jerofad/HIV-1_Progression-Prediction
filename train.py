@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score, KFold
 from sklearn.metrics import classification_report, accuracy_score
 #classifiers
-from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegressionCV, LogisticRegression
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import  AdaBoostClassifier, RandomForestClassifier
 from xgboost import XGBClassifier
@@ -51,12 +51,11 @@ scoring = 'accuracy'
 # TODO: Run Hyperparameters tuning on these models.
 names = [" Random Forest","Neural Net", "AdaBoost","XGBoost", "Logistic Regression "]
 classifiers = [
-     RandomForestClassifier(bootstrap=True, max_depth=10, n_estimators=550, criterion="entropy",
-                                          max_features='auto', class_weight="balanced", n_jobs=5),
-     MLPClassifier(alpha=1,batch_size=30), 
-     AdaBoostClassifier(),
-     XGBClassifier(),
-     LogisticRegression(verbose=5, solver='lbfgs')
+     RandomForestClassifier(random_state = 42),
+     MLPClassifier(random_state = 42), 
+     AdaBoostClassifier(random_state = 42),
+     XGBClassifier(random_state = 42),
+     LogisticRegression(random_state = 42)
 ]
 seed = 1
 models = zip(names, classifiers)
