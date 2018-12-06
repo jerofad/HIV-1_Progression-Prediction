@@ -12,7 +12,7 @@ from matplotlib import pyplot as plt
 #########################################################################
 
 ##### load training dataset ######
-data =  pd.read_csv('training_data.csv', delimiter=',')
+data =  pd.read_csv('data/training_data.csv', delimiter=',')
 print(data[['Resp','PR Seq','RT Seq','VL-t0', 'CD4-t0']].head())
 
 
@@ -49,8 +49,8 @@ plt.savefig('corr_matrix_plot')
 
 
 ##############  Histogram of improving '1' of responds after 16 weeks of therapy #################
-#data['Resp'].hist()
-data["Resp"].value_counts().plot.pie()
+data['Resp'].hist()
+#data["Resp"].value_counts().plot.pie()
 #plt.ylabel("nb patient")
 #plt.xlabel("improve 1 or not 0")
 plt.title('Pie Plot of Class 0 and 1: 0 = no improvement')
@@ -153,10 +153,4 @@ data_grp['CD4-t0'].plot()
 plt.axhline(500, 0, 1002, color='r')
 plt.xlabel("nb patient")
 plt.ylabel("CD4+ count")
-
-
-############ pairplot ##########
-
-sns.pairplot(data, hue='Resp')
-
 
