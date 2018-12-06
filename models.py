@@ -74,20 +74,3 @@ for name, model in models:
         print(accuracy_score(y_test, predictions), file=f)
         print(classification_report(y_test, predictions), file=f)
         print('--------------------------------------------------', file=f)
-
-estimators=[(names[0], classifiers[0] ), 
-            (names[1], classifiers[1]),
-            (names[2], classifiers[2]),
-            (names[3], classifiers[3]),
-            (names[4], classifiers[4])]
-
-# Voting based models 
-votH_clf = VotingClassifier(estimators, voting='hard').fit(X_train, y_train)
-predictions = votH_clf.predict(X_test)
-predictions = [round(value) for value in predictions]
-with open('models_report.txt', 'a') as f:
-    print("Hard Voting Classifier", file=f)
-    print('--------------------------------------------------', file=f)
-    print(accuracy_score(y_test, predictions), file=f)
-    print(classification_report(y_test, predictions), file=f)
-    print('--------------------------------------------------', file=f)
