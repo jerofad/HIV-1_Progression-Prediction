@@ -13,9 +13,15 @@ from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_sc
 from sklearn.metrics import classification_report, accuracy_score
 #classifiers
 from sklearn.linear_model import LogisticRegressionCV
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import  AdaBoostClassifier, RandomForestClassifier
 from xgboost import XGBClassifier
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.gaussian_process.kernels import Matern
 from sklearn.ensemble import VotingClassifier
 #Transformation
 from sklearn.preprocessing import StandardScaler
@@ -43,14 +49,21 @@ X_test = standard_scaler.transform(X_test)
 scoring = 'accuracy'
 
 # Define models 
-names = [" Random Forest","Neural Net", "AdaBoost","XGBoost", "Logistic Regression "]
+names = [" Random Forest","Neural Net", "AdaBoost","XGBoost", "Logistic Regression ",
+         "Support Vector Machine", "K Nearest Neighbours", "Linear Discriminant Analysis",
+         "Gaussian Process", "Gaussian Naive Bayes"]
 classifiers = [
      RandomForestClassifier(bootstrap=True, max_depth=10, n_estimators=550, criterion="entropy",
                                           max_features='auto', class_weight="balanced", n_jobs=5),
      MLPClassifier(alpha=1,batch_size=30), 
      AdaBoostClassifier(),
      XGBClassifier(),
-     LogisticRegressionCV(verbose=5, solver='lbfgs')
+     LogisticRegressionCV(verbose=5, solver='lbfgs'),
+     SVC(gamma='scale', kernel='poly', degree=3, class_weight= "balanced"),
+     KNeighborsClassifier(n_neighbors=3, p=2, n_jobs=10),
+     LinearDiscriminantAnalysis(),
+     GaussianProcessClassifier(kernel= 1.0 * Matern(length_scale=1.0, length_scale_bounds=(1e-1, 10.0),nu=1.5)),
+     GaussianNB()
 ]
 seed = 1
 models = zip(names, classifiers)
