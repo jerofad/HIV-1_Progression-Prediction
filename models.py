@@ -15,6 +15,7 @@ from sklearn.linear_model import LogisticRegressionCV
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import  AdaBoostClassifier, RandomForestClassifier
 from xgboost import XGBClassifier
+from sklearn.ensemble import VotingClassifier
 # class balancing
 from imblearn.over_sampling import SMOTE
 
@@ -44,6 +45,18 @@ classifiers = [
      LogisticRegressionCV(C=8.0, verbose=5, solver='lbfgs')
 ]
 seed = 1
+models = zip(names, classifiers)
+
+# Voting based models 
+votH_clf = VotingClassifier(models)
+votS_clf = VotingClassifier(models, voting='soft')
+
+classifiers.append(votH_clf)
+classifiers.append(votS_clf)
+
+names.append('Hard Voting classifier')
+names.append('Soft Voting classifier')
+
 models = zip(names, classifiers)
 
 # evaluate each model
