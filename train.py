@@ -50,13 +50,13 @@ scoring = 'accuracy'
 # Define Top 5 models.
 
 # TODO: Run Hyperparameters tuning on these models.
-names = [" Random Forest","Neural Net", "AdaBoost","XGBoost", "Logistic Regression "]
+names = ["Logistic Regression ","Neural Net", "LDA","GP Classifier", "Gaussian NB"]
 classifiers = [
-     RandomForestClassifier(random_state = 42),
-     MLPClassifier(random_state = 42), 
-     AdaBoostClassifier(random_state = 42),
-     XGBClassifier(random_state = 42),
      LogisticRegression(random_state = 42)
+     MLPClassifier(random_state = 42), 
+     LinearDiscriminantAnalysis(),
+     GaussianProcessClassifier(kernel= 1.0 * Matern(length_scale=1.0, length_scale_bounds=(1e-1, 10.0),nu=1.5)),
+     GaussianNB()
 ]
 seed = 1
 models = zip(names, classifiers)
@@ -100,7 +100,7 @@ with open('models_report.txt', 'a') as f:
 
 
 
-####------- Logistic Regression Hyperparameters tuning with forest_minimize--------####
+####------- Logistic Regression Hyperparameters tuning with forest_minimize-logreg-------####
 space5  = [Real(1.0, 3.0, name ='C'),
           Integer(10,100, name ='max_iter'),
           Integer(1, 5, name = 'n_jobs'),
@@ -110,9 +110,9 @@ space5  = [Real(1.0, 3.0, name ='C'),
          ]
 @use_named_args(space5)
 def objective4(**params):
-    classifiers[4].set_params(**params)
+    classifiers[0].set_params(**params)
 
-    return -np.mean(cross_val_score(classifiers[4], X_train,y_train, cv=5, n_jobs=-1,
+    return -np.mean(cross_val_score(classifiers[0], X_train,y_train, cv=5, n_jobs=-1,
                                     scoring="neg_mean_absolute_error"))
 
 res_opt = skopt.forest_minimize(objective4, space5, n_calls=50, random_state=42)
@@ -139,11 +139,11 @@ with open('models_report.txt', 'a') as f:
 
 #####-----Stacking all the methods ------####
 
-estimators=[(names[0], rf), 
+estimators=[(names[0], logreg), 
             (names[1], mlp),
-            (names[2], ada),
-            (names[3], xgboost),
-            (names[4], logreg)
+            (names[2], lda),
+            (names[3], gpc),
+            (names[4], gnb)
            ]
 
 # Voting based models 
