@@ -60,7 +60,102 @@ classifiers = [
 ]
 seed = 1
 models = zip(names, classifiers)
-      
+
+
+######## ------GaussianNB Hyperparameter tuning with forest_minimize------####
+space1 = [Real(1e-9, 1e-3, name = "var_smoothing")
+        ]
+@use_named_args(space)
+def objective7(**params):
+    classifiers[4].set_params(**params)
+
+    return -np.mean(cross_val_score(classifiers[4], X_train,y_train, cv=5, n_jobs=-1,
+                                    scoring='neg_mean_absolute_error'))
+
+res_opt = skopt.forest_minimize(objective7, space1, n_calls=50, random_state=42)
+
+
+p = res_opt.x[0]
+gnb = GaussianNB(var_smoothing=p)
+gnb = gnb.fit(X_train,y_train)
+pred = gnb.predict(X_test)
+score = sklearn.metrics.accuracy_score(pred, y_test)
+with open('models_report.txt', 'a') as f:
+  print("\t\t GNB", file=f)
+  print('--------------------------------------------------', file=f)
+  print("""\t\t Best parameters:
+  - var_smoothing=%f""" % (res_opt.x[0]), file=f)
+  print('--------------------------------------------------', file=f)
+  print("\nThe accuracy score that we get is: ",score, file=f)
+  print("\n Confusion Matrix: ", sklearn.metrics.confusion_matrix(y_test, pred), file=f)
+  print(sklearn.metrics.classification_report(y_test,pred), file=f)
+  print('--------------------------------------------------', file=f)
+
+
+#####------- LDA Hyperparameter tuning with forest_minimize------####
+space2 = [Integer(2,10, name="n_components"),
+          Real(1e-5, 1.0, name= "tol")
+      ]
+
+@use_named_args(space)
+def objective6(**params):
+    classifiers[2].set_params(**params)
+
+    return -np.mean(cross_val_score(classifiers[2], X_train,y_train, cv=5, n_jobs=-1,
+                                    scoring='neg_mean_absolute_error'))
+
+res_opt = skopt.forest_minimize(objective6, space2, n_calls=50, random_state=42)
+
+p1, p2 = res_opt.x[0], res_opt.x[1]
+lda = LinearDiscriminantAnalysis(n_components=p1,tol= p2)
+lda = lda.fit(X_train,y_train)
+pred = lda.predict(X_test)
+score = sklearn.metrics.accuracy_score(pred, y_test)
+with open('models_report.txt', 'a') as f:
+  print("\t\t LDA", file=f)
+  print('--------------------------------------------------', file=f)
+  print("""\t\t Best parameters:
+  - n_components=%d
+  - tol=%f""" % (res_opt.x[0], res_opt.x[1]), file=f)
+  print('--------------------------------------------------', file=f)
+  print("\nThe accuracy score that we get is: ",score, file =f)
+  print("\n Confusion Matrix: ", sklearn.metrics.confusion_matrix(y_test, pred), file=f)
+  print(sklearn.metrics.classification_report(y_test,pred), file=f)
+  print('--------------------------------------------------', file=f)
+
+######## ------Gaussian Process Classifier Hyperparameter tuning with ########----------forest_minimize------####
+space3 = [Integer(0, 2, name= "n_restarts_optimizer"),
+          Integer(25, 50, name = "max_iter_predict"),
+          Integer(1, 3, name = "n_jobs")
+    ]
+@use_named_args(space)
+def objective8(**params):
+    classifiers[3].set_params(**params)
+
+    return -np.mean(cross_val_score(classifiers[3], X_train,y_train, cv=5, n_jobs=-1,
+                                    scoring='neg_mean_absolute_error'))
+
+res_opt = skopt.forest_minimize(objective8, space3, n_calls=50, random_state=42)
+
+p1,p2,p3 = res_opt.x[0], res_opt.x[1], res_opt.x[2]
+gpc = GaussianProcessClassifier(n_restarts_optimizer=p1 ,max_iter_predict=p2 , n_jobs=p3)
+gpc = gpc.fit(X_train,y_train)
+pred = gpc.predict(X_test)
+score = sklearn.metrics.accuracy_score(pred, y_test)
+with open('models_report.txt', 'a') as f:
+  print("\t\t Gaussian Process Classifier", file=f)
+  print('--------------------------------------------------', file=f)
+  print("""\t\t Best parameters:
+  - n_restarts_optimizer=%d
+  - max_iter_predict=%d
+  - n_jobs=%d""" % (res_opt.x[0], res_opt.x[1], res_opt.x[2]), file=f)
+  print('--------------------------------------------------', file=f)
+  print("\nThe accuracy score that we get is: ",score, file=f)
+  print("\n Confusion Matrix: ", sklearn.metrics.confusion_matrix(y_test, pred), file=f)
+  print(sklearn.metrics.classification_report(y_test,pred), file=f)
+  print('--------------------------------------------------', file=f)
+
+
 
 ####---------MLP Hyper-parameters tuning with forest_minimize------####
 space4  = [Real(0.0001, 1.0, name='alpha'),
