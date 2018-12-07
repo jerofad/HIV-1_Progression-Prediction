@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
 ##### Library Importation ####
-
+import os
 import seaborn as sns
 import numpy as np
 import scipy
 import pandas as pd
 from matplotlib import pyplot as plt
 
+
+if not os.path.exists('./Figures'):
+    os.mkdir('./Figures')
 #get_ipython().run_line_magic('matplotlib', 'inline')
 #########################################################################
 
@@ -45,7 +48,7 @@ data_X.corr()
 # general data correlation heatmap
 sns.heatmap(data[['Resp','VL-t0', 'CD4-t0']].corr(),cmap='YlGnBu')
 plt.title('Correlation heatmap')
-plt.savefig('corr_matrix_plot')
+plt.savefig('./Figures/corr_matrix_plot')
 
 
 ##############  Histogram of improving '1' of responds after 16 weeks of therapy #################
@@ -54,7 +57,7 @@ data['Resp'].hist()
 #plt.ylabel("nb patient")
 #plt.xlabel("improve 1 or not 0")
 plt.title('Pie Plot of Class 0 and 1: 0 = no improvement')
-plt.savefig('imbalanced_plot')
+plt.savefig('./Figures/imbalanced_plot')
 
 
 
@@ -92,14 +95,14 @@ class_0_X['CD4-t0'].hist()
 plt.ylabel('Effective')
 plt.xlabel('CD4+ count')
 plt.title('Class 0: no improvement')
-plt.savefig('Class0_origin_data_CD4')
+plt.savefig('./Figures/Class0_origin_data_CD4')
 
 ###### VL-t0 histogram
 class_0_X['VL-t0'].hist()
 plt.ylabel('Effective')
 plt.xlabel('viral load')
 plt.title('Class 0: no improvement')
-plt.savefig('Class0_origin_data_VL')
+plt.savefig('./Figures/Class0_origin_data_VL')
 
 
 ############################ Class 1: Improvement ##################################################
@@ -123,7 +126,7 @@ class_1_X['CD4-t0'].hist()
 plt.ylabel('Effective')
 plt.xlabel('CD4+ count')
 plt.title('Class 1: improvement')
-plt.savefig('Class0_origin_data_CD4')
+plt.savefig('./Figures/Class0_origin_data_CD4')
 
 
 ###### VL-t0 histogram
@@ -132,7 +135,7 @@ class_1_X['VL-t0'].hist()
 plt.ylabel('Effective')
 plt.xlabel('viral load')
 plt.title('Class 1: improvement')
-plt.savefig('Class1_origin_data_VL')
+plt.savefig('./Figures/Class1_origin_data_VL')
 
 
 ########################## Plotting  ##########################
@@ -144,7 +147,7 @@ plt.xlabel("nb patient")
 plt.ylabel("viral load")
 
 ######  save figure, format '.png'
-plt.savefig('viral_load_plot.png')
+plt.savefig('./Figures/viral_load_plot.png')
 
 
 ##############  plotting of absolute CD4 count "CD4-t0" #################
