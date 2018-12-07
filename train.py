@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 #scikit imports
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score, KFold
-from sklearn.metrics import classification_report, accuracy_score
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 #classifiers
 from sklearn.linear_model import LogisticRegressionCV, LogisticRegression
 from sklearn.neural_network import MLPClassifier
@@ -21,9 +21,10 @@ from xgboost import XGBClassifier
 from sklearn.ensemble import VotingClassifier
 #Transformation
 from sklearn.preprocessing import StandardScaler
-
+import sklearn
 import warnings
 warnings.filterwarnings("ignore")
+import skopt
 from skopt.space import Real, Integer
 from skopt.utils import use_named_args
 
@@ -82,25 +83,24 @@ for name, model in models:
         print('--------------------------------------------------', file=f)
         
  ######--------RANDOM FOREST Hyperparameter tuning with forest_minimize-----##### 
- space1  = [Integer(1, 10, name ='max_depth'),
-          Integer(10,300, name ='n_estimators'),
-          Integer(1, 10, name = 'n_jobs'),
-          Integer(2, 10, name = "min_samples_split"),
-          Integer(1, 5, name = "min_samples_leaf"),
-          Integer(2, 7, name = "max_features")
-         ]
+space1  = [Integer(1, 10, name ='max_depth'),
+            Integer(10,300, name ='n_estimators'),
+            Integer(1, 10, name = 'n_jobs'),
+            Integer(2, 10, name = "min_samples_split"),
+            Integer(1, 5, name = "min_samples_leaf"),
+            Integer(2, 7, name = "max_features")]
 
 # this decorator allows your objective function to receive a the parameters as
 # keyword arguments. This is particularly convenient when you want to set scikit-learn
 # estimator parameters
-@use_named_args(space)
+@use_named_args(space1)
 def objective1(**params):
     classifiers[0].set_params(**params)
 
     return -np.mean(cross_val_score(classifiers[0], X_train,y_train, cv=5, n_jobs=-1,
                                     scoring='roc_auc'))
 
-res_opt = skopt.forest_minimize(objective1, space, n_calls=50, random_state=42)
+res_opt = skopt.forest_minimize(objective1, space1, n_calls=50, random_state=42)
 print("""\t\t Best parameters RANDOM FORESTS:
 - max_depth=%d
 - n_estimators=%.6f
@@ -112,10 +112,10 @@ print("""\t\t Best parameters RANDOM FORESTS:
 rf = RandomForestClassifier(max_depth=2, n_estimators=274, min_samples_split=6,min_samples_leaf=2, max_features=5, n_jobs=10,random_state = 42)
 rf = rf.fit(X_train,y_train)
 pred = rf.predict(X_test)
-score = sklearn.metrics.accuracy_score(pred, y_test)
+score = accuracy_score(pred, y_test)
 print("\nThe accuracy score that we get is: ",score)
-print("\n Confusion Matrix: ", sklearn.metrics.confusion_matrix(y_test, pred))
-print(sklearn.metrics.classification_report(y_test,pred))
+print("\n Confusion Matrix: ", confusion_matrix(y_test, pred))
+print(classification_report(y_test,pred))
  
 ###--------XGBOOST Hyperparameters tuning with GridSearch-------####
 # specify parameters and distributions to sample from
@@ -140,7 +140,7 @@ print(sklearn.metrics.classification_report(y_test,pred))
 ###--------AdaBoost Hyper-parameter tuning with forest_minimize----######
 space3  = [Real(0.000001, 1.0, name='learning_rate'),
           Integer(10, 100,name='n_estimators'),]
-@use_named_args(space)
+@use_named_args(space3)
 def objective2(**params):
     classifiers[2].set_params(**params)
 
@@ -170,7 +170,7 @@ space4  = [Real(0.0001, 1.0, name='alpha'),
           Integer(10, 100,name='max_iter'),
           Integer(50, 150, name='hidden_layer_sizes')]
 
-@use_named_args(space)
+@use_named_args(space4)
 def objective3(**params):
     classifiers[1].set_params(**params)
 
@@ -204,7 +204,7 @@ space5  = [Real(1.0, 3.0, name ='C'),
           Real(1e-4, 1.0, name = "tol"),
           Integer(0, 10, name = "verbose")
          ]
-@use_named_args(space)
+@use_named_args(space5)
 def objective4(**params):
     classifiers[4].set_params(**params)
 
