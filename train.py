@@ -252,6 +252,8 @@ with open('models_report.txt', 'a') as f:
     print(classification_report(y_test, predictions), file=f)
     print('--------------------------------------------------', file=f)
 
+estimators.append(('Hard Voting Classifier', votH_clf))
+
 # Confusion matrix plot on tets data
 f, (ax1) = plt.subplots(2,3)
 
