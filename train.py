@@ -15,10 +15,14 @@ from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_sc
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 #classifiers
 from sklearn.linear_model import LogisticRegressionCV, LogisticRegression
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import  AdaBoostClassifier, RandomForestClassifier
 from xgboost import XGBClassifier
+from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.ensemble import VotingClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.gaussian_process.kernels import Matern
 #Transformation
 from sklearn.preprocessing import StandardScaler
 import sklearn
@@ -52,7 +56,7 @@ scoring = 'accuracy'
 # TODO: Run Hyperparameters tuning on these models.
 names = ["Logistic Regression ","Neural Net", "LDA","GP Classifier", "Gaussian NB"]
 classifiers = [
-     LogisticRegression(random_state = 42)
+     LogisticRegression(random_state = 42),
      MLPClassifier(random_state = 42), 
      LinearDiscriminantAnalysis(),
      GaussianProcessClassifier(kernel= 1.0 * Matern(length_scale=1.0, length_scale_bounds=(1e-1, 10.0),nu=1.5)),
@@ -65,7 +69,7 @@ models = zip(names, classifiers)
 ######## ------GaussianNB Hyperparameter tuning with forest_minimize------####
 space1 = [Real(1e-9, 1e-3, name = "var_smoothing")
         ]
-@use_named_args(space)
+@use_named_args(space1)
 def objective7(**params):
     classifiers[4].set_params(**params)
 
@@ -97,7 +101,7 @@ space2 = [Integer(2,10, name="n_components"),
           Real(1e-5, 1.0, name= "tol")
       ]
 
-@use_named_args(space)
+@use_named_args(space2)
 def objective6(**params):
     classifiers[2].set_params(**params)
 
@@ -128,7 +132,7 @@ space3 = [Integer(0, 2, name= "n_restarts_optimizer"),
           Integer(25, 50, name = "max_iter_predict"),
           Integer(1, 3, name = "n_jobs")
     ]
-@use_named_args(space)
+@use_named_args(space3)
 def objective8(**params):
     classifiers[3].set_params(**params)
 
