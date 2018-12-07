@@ -33,41 +33,42 @@ If you are not using git, just download the repository as zip, and unpack it:
 
 ```bash
 wget https://github.com/jerofad/HIV-1_Progression-Prediction/archive/master.zip
-#For Mac users:
-#curl -O https://github.com/jerofad/HIV-1_Progression-Prediction/archive/master.zip
+For Mac users:
+curl -O https://github.com/jerofad/HIV-1_Progression-Prediction/archive/master.zip
 unzip master.zip
 ```
 Change into the course folder, then type:
 
 ```bash
-#cd HIV-1_Progression-Prediction
+cd HIV-1_Progression-Prediction
 ```
 ## # To perform Data Analysis
 Run the command below:
 
 ```bash
-#python3 data_analysis.py
+python3 data_analysis.py
 ```
 The results is saved into the directory named Figures.
-## # To perform Feature Engineering
-Run the command below:
 
-```bash
-#python3 get_features.py
-```
-which saves the new data into the Data Folder.
 ## # To Repeat the experiment on all 10 Models
 Run the command below:
 
 ```bash
-#python3 models.py
+python3 models.py
 ```
 It saves the result into a text file named "all_models_report.txt"
+## # Tuning the Hyper-Parameters
+If you want to train the top 5 models with parameters tuning, Run the command below 
+
+```bash
+python3 parameter_tuning.py
+```
+the result of the models can be seen in the text file "models_report.txt"
 ## # Final top 5 Models
 Run the command below:
 
 ```bash
-#python3 train.py
+python3 train.py
 ```
 the result of the models can be seen in the text file "models_report.txt"
 

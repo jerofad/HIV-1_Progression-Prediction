@@ -29,6 +29,8 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings("ignore")
 
+#Clear the text file of previous report.
+open('all_models_report.txt', 'w').close()
 
 #Load train and test datasets
 train_Data = pd.read_csv('data/training_new_data.csv')

@@ -1,0 +1,258 @@
+--------------------------------------------------
+
+The accuracy score that we get is:  0.875
+--------------------------------------------------
+
+The accuracy score that we get is:  0.875
+
+ Confusion Matrix:  [[148   3]
+ [ 20  13]]
+              precision    recall  f1-score   support
+
+           0       0.88      0.98      0.93       151
+           1       0.81      0.39      0.53        33
+
+   micro avg       0.88      0.88      0.88       184
+   macro avg       0.85      0.69      0.73       184
+weighted avg       0.87      0.88      0.86       184
+
+Total time Taken is : 0.003935000000000022
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8478260869565217
+
+ Confusion Matrix:  [[147   4]
+ [ 24   9]]
+              precision    recall  f1-score   support
+
+           0       0.86      0.97      0.91       151
+           1       0.69      0.27      0.39        33
+
+   micro avg       0.85      0.85      0.85       184
+   macro avg       0.78      0.62      0.65       184
+weighted avg       0.83      0.85      0.82       184
+
+Total time Taken is : 0.3605099999999999
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8695652173913043
+
+ Confusion Matrix:  [[144   7]
+ [ 17  16]]
+              precision    recall  f1-score   support
+
+           0       0.89      0.95      0.92       151
+           1       0.70      0.48      0.57        33
+
+   micro avg       0.87      0.87      0.87       184
+   macro avg       0.80      0.72      0.75       184
+weighted avg       0.86      0.87      0.86       184
+
+Total time Taken is : 0.017979999999999885
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8532608695652174
+
+ Confusion Matrix:  [[146   5]
+ [ 22  11]]
+              precision    recall  f1-score   support
+
+           0       0.87      0.97      0.92       151
+           1       0.69      0.33      0.45        33
+
+   micro avg       0.85      0.85      0.85       184
+   macro avg       0.78      0.65      0.68       184
+weighted avg       0.84      0.85      0.83       184
+
+Total time Taken is : 12.194761
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8641304347826086
+
+ Confusion Matrix:  [[144   7]
+ [ 18  15]]
+              precision    recall  f1-score   support
+
+           0       0.89      0.95      0.92       151
+           1       0.68      0.45      0.55        33
+
+   micro avg       0.86      0.86      0.86       184
+   macro avg       0.79      0.70      0.73       184
+weighted avg       0.85      0.86      0.85       184
+
+Total time Taken is : 0.019557999999999964
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.875
+
+ Confusion Matrix:  [[148   3]
+ [ 20  13]]
+              precision    recall  f1-score   support
+
+           0       0.88      0.98      0.93       151
+           1       0.81      0.39      0.53        33
+
+   micro avg       0.88      0.88      0.88       184
+   macro avg       0.85      0.69      0.73       184
+weighted avg       0.87      0.88      0.86       184
+
+Total time Taken is : 0.0031399999999999206
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8478260869565217
+
+ Confusion Matrix:  [[147   4]
+ [ 24   9]]
+              precision    recall  f1-score   support
+
+           0       0.86      0.97      0.91       151
+           1       0.69      0.27      0.39        33
+
+   micro avg       0.85      0.85      0.85       184
+   macro avg       0.78      0.62      0.65       184
+weighted avg       0.83      0.85      0.82       184
+
+Total time Taken is : 0.3105629999999999
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8695652173913043
+
+ Confusion Matrix:  [[144   7]
+ [ 17  16]]
+              precision    recall  f1-score   support
+
+           0       0.89      0.95      0.92       151
+           1       0.70      0.48      0.57        33
+
+   micro avg       0.87      0.87      0.87       184
+   macro avg       0.80      0.72      0.75       184
+weighted avg       0.86      0.87      0.86       184
+
+Total time Taken is : 0.015778999999999987
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8532608695652174
+
+ Confusion Matrix:  [[146   5]
+ [ 22  11]]
+              precision    recall  f1-score   support
+
+           0       0.87      0.97      0.92       151
+           1       0.69      0.33      0.45        33
+
+   micro avg       0.85      0.85      0.85       184
+   macro avg       0.78      0.65      0.68       184
+weighted avg       0.84      0.85      0.83       184
+
+Total time Taken is : 13.351534
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8641304347826086
+
+ Confusion Matrix:  [[144   7]
+ [ 18  15]]
+              precision    recall  f1-score   support
+
+           0       0.89      0.95      0.92       151
+           1       0.68      0.45      0.55        33
+
+   micro avg       0.86      0.86      0.86       184
+   macro avg       0.79      0.70      0.73       184
+weighted avg       0.85      0.86      0.85       184
+
+Total time Taken is : 0.08850699999999989
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.875
+
+ Confusion Matrix:  [[148   3]
+ [ 20  13]]
+              precision    recall  f1-score   support
+
+           0       0.88      0.98      0.93       151
+           1       0.81      0.39      0.53        33
+
+   micro avg       0.88      0.88      0.88       184
+   macro avg       0.85      0.69      0.73       184
+weighted avg       0.87      0.88      0.86       184
+
+Total time Taken is : 0.0033560000000000256
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8478260869565217
+
+ Confusion Matrix:  [[147   4]
+ [ 24   9]]
+              precision    recall  f1-score   support
+
+           0       0.86      0.97      0.91       151
+           1       0.69      0.27      0.39        33
+
+   micro avg       0.85      0.85      0.85       184
+   macro avg       0.78      0.62      0.65       184
+weighted avg       0.83      0.85      0.82       184
+
+Total time Taken is : 0.3036380000000001
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8695652173913043
+
+ Confusion Matrix:  [[144   7]
+ [ 17  16]]
+              precision    recall  f1-score   support
+
+           0       0.89      0.95      0.92       151
+           1       0.70      0.48      0.57        33
+
+   micro avg       0.87      0.87      0.87       184
+   macro avg       0.80      0.72      0.75       184
+weighted avg       0.86      0.87      0.86       184
+
+Total time Taken is : 0.01165000000000016
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8532608695652174
+
+ Confusion Matrix:  [[146   5]
+ [ 22  11]]
+              precision    recall  f1-score   support
+
+           0       0.87      0.97      0.92       151
+           1       0.69      0.33      0.45        33
+
+   micro avg       0.85      0.85      0.85       184
+   macro avg       0.78      0.65      0.68       184
+weighted avg       0.84      0.85      0.83       184
+
+Total time Taken is : 12.617932
+--------------------------------------------------
+--------------------------------------------------
+
+The accuracy score that we get is:  0.8641304347826086
+
+ Confusion Matrix:  [[144   7]
+ [ 18  15]]
+              precision    recall  f1-score   support
+
+           0       0.89      0.95      0.92       151
+           1       0.68      0.45      0.55        33
+
+   micro avg       0.86      0.86      0.86       184
+   macro avg       0.79      0.70      0.73       184
+weighted avg       0.85      0.86      0.85       184
+
+Total time Taken is : 0.16913300000000042
+--------------------------------------------------
