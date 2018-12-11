@@ -123,11 +123,12 @@ estimators.append(('Hard Voting Classifier', votH_clf))
 
 # Confusion matrix plot on tets data
 f, (ax1) = plt.subplots(2,3)
-
+k = 0
 for i in range(2):
     for j in range(3):
-        im = ax1[i,j].matshow(confusion_matrix(y_test, estimators[i + j][1].predict(X_test)),cmap='OrRd')
-        ax1[i,j].set(xlabel='Predicted', ylabel='Actual', title = str(estimators[i + j][0]))
+        im = ax1[i,j].matshow(confusion_matrix(y_test, estimators[k][1].predict(X_test)),cmap='OrRd')
+        ax1[i,j].set(xlabel='Predicted', ylabel='Actual', title = str(estimators[k][0]))
         f.colorbar(im, ax=ax1[i,j])
+        k+=1
         
 plt.savefig('./Figures/classifies_confusion_matrix.jpg')
